@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"math/big"
 	"os"
+	"slices"
 
 	"github.com/noxsios/ezpass/words"
 )
@@ -22,7 +23,7 @@ func main() {
 
 	flag.Parse()
 
-	if len(os.Args[1:]) > 0 || help {
+	if help || slices.Contains(os.Args[1:], "--help") {
 		flag.PrintDefaults()
 		os.Exit(0)
 	}
