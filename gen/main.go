@@ -20,7 +20,7 @@ func main() {
 	for scanner.Scan() {
 		line := scanner.Text()
 		stripped := strings.Trim(line, " ")
-		if strings.Contains(stripped, "'") {
+		if strings.Contains(stripped, "'") || len(stripped) < 3 {
 			continue
 		}
 		words = append(words, stripped)
