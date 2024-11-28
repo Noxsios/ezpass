@@ -1,4 +1,12 @@
-.DEFAULT_GOAL := ezpass
+.DEFAULT_GOAL := build
 
-ezpass:
+build:
 	go build .
+
+clean:
+	rm -f ezpass
+
+words:
+	go run gen/main.go > words/gen.go
+
+.PHONY: build clean words
