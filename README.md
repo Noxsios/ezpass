@@ -8,3 +8,6 @@ First goal is to replicate the following in a statically linked go binary:
 grep "^[^']\{3,5\}$" /usr/share/dict/words | shuf -n4 | paste -sd'.' -
 ```
 
+```bash
+go install github.com/noxsios/ezpass
+```
