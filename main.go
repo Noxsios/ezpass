@@ -12,8 +12,8 @@ import (
 )
 
 func main() {
-	var length int
-	flag.IntVar(&length, "l", 4, "Number of words to use")
+	var n int
+	flag.IntVar(&n, "n", 4, "Number of words in resulting password")
 
 	var delimiter string
 	flag.StringVar(&delimiter, "d", ".", "Delimiter between words")
@@ -30,7 +30,7 @@ func main() {
 
 	max := big.NewInt(int64(len(words.ALL)))
 
-	for i := range length {
+	for i := range n {
 		randBigInt, err := rand.Int(rand.Reader, max)
 		if err != nil {
 			_, err := fmt.Fprintln(os.Stderr, "error: %s", err.Error())
@@ -43,7 +43,7 @@ func main() {
 		index := int(randBigInt.Int64())
 
 		fmt.Print(words.ALL[index])
-		if i < length-1 {
+		if i < n-1 {
 			fmt.Print(delimiter)
 		}
 	}
