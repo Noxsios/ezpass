@@ -52,6 +52,7 @@ func main() {
 				// truly panic now
 				panic(err)
 			}
+			os.Exit(1)
 		}
 
 		index := int(randBigInt.Int64())
