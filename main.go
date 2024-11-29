@@ -62,4 +62,5 @@ func main() {
 			fmt.Print(delimiter)
 		}
 	}
+	fmt.Print("\n")
 }
