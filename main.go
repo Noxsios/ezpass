@@ -1,10 +1,8 @@
 package main
 
 import (
-	"crypto/rand"
 	"flag"
 	"fmt"
-	"math/big"
 	"os"
 	"runtime/debug"
 	"slices"
@@ -42,25 +40,14 @@ func main() {
 		os.Exit(0)
 	}
 
-	max := big.NewInt(int64(len(words.ALL)))
+	if n <= 0 || n >= len(words.ALL) {
+		fmt.Fprintln(os.Stderr, "error: number of words must be 0 < n <", len(words.ALL), ", got:", n)
+		os.Exit(1)
+	}
 
-	for i := range n {
-		randBigInt, err := rand.Int(rand.Reader, max)
-		if err != nil {
-			_, err := fmt.Fprintln(os.Stderr, "error: %s", err.Error())
-			if err != nil {
-				// truly panic now
-				panic(err)
-			}
-			os.Exit(1)
-		}
-
-		index := int(randBigInt.Int64())
-
-		fmt.Print(words.ALL[index])
-		if i < n-1 {
-			fmt.Print(delimiter)
-		}
+	if err := words.PrintEzpass(os.Stdout, n, delimiter); err != nil {
+		fmt.Fprintln(os.Stderr, "error:", err.Error())
+		os.Exit(1)
 	}
 	fmt.Print("\n")
 }

@@ -9,4 +9,7 @@ clean:
 words:
 	go run gen/main.go > words/gen.go
 
-.PHONY: build clean words
+test:
+	go test ./...
+
+.PHONY: build clean words test
