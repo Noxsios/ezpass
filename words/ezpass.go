@@ -1,3 +1,7 @@
+// SPDX-License-Identifier: Apache-2.0
+// SPDX-FileCopyrightText: 2024-Present Harry Randazzo
+
+// Package words contains the generated wordlist and passphrase printer
 package words
 
 import (
@@ -7,11 +11,12 @@ import (
 	"math/big"
 )
 
+// PrintEzpass prints to wr a random passphrase of n words separated by a given delimiter
 func PrintEzpass(wr io.Writer, n int, delimiter string) error {
-	max := big.NewInt(int64(len(ALL)))
+	upper := big.NewInt(int64(len(ALL)))
 
 	for i := range n {
-		randBigInt, err := rand.Int(rand.Reader, max)
+		randBigInt, err := rand.Int(rand.Reader, upper)
 		if err != nil {
 			return err
 		}

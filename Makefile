@@ -12,4 +12,7 @@ words:
 test:
 	go test ./...
 
-.PHONY: build clean words test
+lint:
+	golangci-lint run ./...
+
+.PHONY: build clean words test lint
