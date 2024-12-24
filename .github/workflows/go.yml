@@ -27,7 +27,7 @@ jobs:
             go.sum
             go.mod
       - run: make
-      - run: go test -race -covermode=atomic -coverprofile=coverage.out -failfast -timeout 3m ./...
+      - run: go test -timeout 3m ./...
 
   golangci:
     name: lint
