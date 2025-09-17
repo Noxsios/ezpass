@@ -14,6 +14,8 @@ import (
 	"github.com/spf13/pflag"
 )
 
+// Main is the entry point for the ezpass CLI application.
+// It processes command line arguments and returns an exit code.
 func Main() int {
 	ezFlags := pflag.NewFlagSet("ezpass", pflag.ExitOnError)
 	ezFlags.SortFlags = false
