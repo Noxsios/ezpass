@@ -1,3 +1,2 @@
 ! exec ezpass -n foo
-stdout ''
-stderr 'error doing bad stuff'
+stderr 'invalid argument "foo" for "-n, --number-of-words" flag: strconv.ParseInt: parsing "foo": invalid syntax'

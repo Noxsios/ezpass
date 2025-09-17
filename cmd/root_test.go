@@ -23,6 +23,6 @@ func TestE2E(t *testing.T) {
 		Dir:                 ".",
 		RequireUniqueNames:  true,
 		RequireExplicitExec: true,
-		UpdateScripts:       true,
+		// UpdateScripts:       true,
 	})
 }

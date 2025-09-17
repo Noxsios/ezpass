@@ -25,8 +25,17 @@ cmp stderr usage.txt
 exec ezpass --help -d ":" -n 2
 cmp stderr usage.txt
 
+exec ezpass -v
+cmp stdout dev-version.txt
+
+exec ezpass --version
+cmp stdout dev-version.txt
+
 -- usage.txt --
   -n, --number-of-words int   Number of words in resulting password. (default 4)
   -d, --delimiter string      Delimiter between words. (default ".")
   -v, --version               Print the version number of ezpass and exit.
   -h, --help                  Print this message and exit.
+
+-- dev-version.txt --
+(devel)
