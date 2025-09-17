@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: Apache-2.0
 // SPDX-FileCopyrightText: 2024-Present Harry Randazzo
 
-package main
+package cmd
 
 import (
 	"os"
@@ -20,8 +20,8 @@ func TestMain(m *testing.M) {
 
 func TestE2E(t *testing.T) {
 	testscript.Run(t, testscript.Params{
-		Dir:                "testdata",
+		Dir:                ".",
 		RequireUniqueNames: true,
-		UpdateScripts:      true,
+		// UpdateScripts:      true,
 	})
 }

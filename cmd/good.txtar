@@ -4,8 +4,8 @@ stdout '^\w+\.\w+\.\w+\.\w+$'
 exec ezpass -n 3
 stdout '^\w+\.\w+\.\w+$'
 
-#exec ezpass -d ":"
-#stdout '^\w+\:\w+\:\w+\:\w+$'
+exec ezpass -d ":"
+stdout '^\w+\:\w+\:\w+\:\w+$'
 
 #exec ezpass -d ":" -n 2
 #stdout '^\w+\:\w+$'
@@ -101,5 +101,5 @@ Usage of ezpass:
   -test.v
     	verbose: print additional output
   -testwork
-    	
+
   -v	Print the version number of ezpass and exit.
