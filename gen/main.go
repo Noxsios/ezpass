@@ -23,14 +23,17 @@ func main() {
 
 	for scanner.Scan() {
 		line := scanner.Text()
+
 		stripped := strings.Trim(line, " ")
 		if strings.Contains(stripped, "'") || len(stripped) < 3 {
 			continue
 		}
+
 		words = append(words, stripped)
 	}
 
 	tmpl := template.New("words")
+
 	tmpl, err = tmpl.Parse(`// SPDX-License-Identifier: Apache-2.0
 // SPDX-FileCopyrightText: 2024-Present Harry Randazzo
 

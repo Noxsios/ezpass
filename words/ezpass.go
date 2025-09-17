@@ -11,7 +11,7 @@ import (
 	"math/big"
 )
 
-// PrintEzpass prints to wr a random passphrase of n words separated by a given delimiter
+// PrintEzpass prints to wr a random passphrase of n words separated by a given delimiter.
 func PrintEzpass(wr io.Writer, n int, delimiter string) error {
 	upper := big.NewInt(int64(len(ALL)))
 
@@ -24,9 +24,11 @@ func PrintEzpass(wr io.Writer, n int, delimiter string) error {
 		index := int(randBigInt.Int64())
 
 		fmt.Fprint(wr, ALL[index])
+
 		if i < n-1 {
 			fmt.Fprint(wr, delimiter)
 		}
 	}
+
 	return nil
 }

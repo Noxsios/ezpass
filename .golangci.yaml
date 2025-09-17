@@ -1,10 +1,17 @@
 version: "2"
 linters:
+  default: fast
   enable:
     - goheader
     - nolintlint
     - revive
     - testifylint
+  disable:
+    - depguard
+    - mnd
+    - funlen
+    - wsl
+    - wsl_v5
   settings:
     goheader:
       template: |-
