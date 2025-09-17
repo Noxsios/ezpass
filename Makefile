@@ -15,4 +15,7 @@ test:
 lint:
 	golangci-lint run ./...
 
-.PHONY: build clean words test lint
+lint-fix:
+	golangci-lint run ./... --fix
+
+.PHONY: build clean words test lint lint-fix
