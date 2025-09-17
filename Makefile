@@ -1,21 +1,30 @@
 .DEFAULT_GOAL := build
 
-build:
-	go build .
+build: ## Build ezpass
+	CGO_ENABLED=0 go build .
 
-clean:
+install: ## Installs local builds
+	CGO_ENABLED=0 go install -v .
+
+clean: ## Clean compiled binary / misc artifacts
 	rm -f ezpass
 
-words:
+words: ## Generate wordlist
 	go run gen/main.go > words/gen.go
 
-test:
+test: ## Run tests
 	go test ./...
 
-lint:
+lint: ## Run linters
 	golangci-lint run ./...
 
-lint-fix:
+lint-fix: ## Run linters and formatters, atttempt autofixes
 	golangci-lint run ./... --fix
 
-.PHONY: build clean words test lint lint-fix
+help: ## Show this help message
+	@echo 'Usage: make [target]'
+	@echo ''
+	@echo 'Available targets:'
+	@awk 'BEGIN {FS = ":.*## "} /^[a-zA-Z0-9_-]+:.*## / {printf "  %-15s %s\n", $$1, $$2}' $(MAKEFILE_LIST)
+
+.PHONY: build clean words test lint lint-fix help

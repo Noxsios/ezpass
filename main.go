@@ -41,7 +41,7 @@ func Main() int {
 	if ver {
 		bi, ok := debug.ReadBuildInfo()
 		if !ok {
-			fmt.Println("version information not available")
+			fmt.Fprintln(os.Stderr, "version information not available")
 			return 1
 		}
 		fmt.Println(bi.Main.Version)
