@@ -22,7 +22,9 @@ func TestPrintEzpass(t *testing.T) {
 	for i := range 1000000 {
 		t.Run(fmt.Sprintf("run-%d", i), func(t *testing.T) {
 			t.Parallel()
+
 			var buf strings.Builder
+
 			err := words.PrintEzpass(&buf, 4, ".")
 			if err != nil {
 				t.Errorf("unexpected error: %s", err.Error())
