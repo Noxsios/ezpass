@@ -10,6 +10,7 @@ import (
 	"os"
 	"runtime/debug"
 	"slices"
+	"strings"
 
 	"github.com/noxsios/ezpass/words"
 )
@@ -34,10 +35,11 @@ func Main() int {
 		os.Exit(2)
 	}
 
-	// delimiter = strings.Trim(delimiter, `"`)
+	delimiter = strings.Trim(delimiter, `"`)
+	delimiter = strings.Trim(delimiter, "'")
 
 	if help || slices.Contains(os.Args[1:], "--help") {
-		flag.PrintDefaults()
+		ezFlags.PrintDefaults()
 		return 0
 	}
 
