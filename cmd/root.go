@@ -39,7 +39,7 @@ func Main() int {
 
 	if err := ezFlags.Parse(os.Args[1:]); err != nil {
 		fmt.Fprintln(os.Stderr, "error parsing flags:", err)
-		os.Exit(2)
+		return 2
 	}
 
 	delimiter = strings.Trim(delimiter, `"`)
