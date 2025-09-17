@@ -11,14 +11,13 @@ grep "^[^']\{3,5\}$" /usr/share/dict/words | shuf -n4 | paste -sd'.' -
 ```
 
 ```bash
-go install github.com/noxsios/ezpass
+CGO_ENABLED=0 go install github.com/noxsios/ezpass
 ```
 
 ```bash
 $ ezpass -h
-  -d string
-      Delimiter between words (default ".")
-  -h	Print this message and exit.
-  -n int
-      Number of words in resulting password (default 4)
+-n, --number-of-words int   Number of words in resulting password. (default 4)
+-d, --delimiter string      Delimiter between words. (default ".")
+-v, --version               Print the version number of ezpass and exit.
+-h, --help                  Print this message and exit.
 ```
