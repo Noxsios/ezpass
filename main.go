@@ -33,6 +33,8 @@ func Main() int {
 
 	flag.Parse()
 
+	fmt.Println(delimiter)
+
 	if help || slices.Contains(os.Args[1:], "--help") {
 		flag.PrintDefaults()
 		return 0
