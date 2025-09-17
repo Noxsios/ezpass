@@ -5,30 +5,31 @@
 package cmd
 
 import (
-	"flag"
 	"fmt"
 	"os"
 	"runtime/debug"
-	"slices"
 	"strings"
 
 	"github.com/noxsios/ezpass/words"
+	"github.com/spf13/pflag"
 )
 
 func Main() int {
-	ezFlags := flag.NewFlagSet("ezpass", flag.ExitOnError)
+	ezFlags := pflag.NewFlagSet("ezpass", pflag.ExitOnError)
+	ezFlags.SortFlags = false
+	ezFlags.Usage = func() {}
 
 	var n int
-	ezFlags.IntVar(&n, "n", 4, "Number of words in resulting password.")
+	ezFlags.IntVarP(&n, "number-of-words", "n", 4, "Number of words in resulting password.")
 
 	var delimiter string
-	ezFlags.StringVar(&delimiter, "d", ".", "Delimiter between words.")
-
-	var help bool
-	ezFlags.BoolVar(&help, "h", false, "Print this message and exit.")
+	ezFlags.StringVarP(&delimiter, "delimiter", "d", ".", "Delimiter between words.")
 
 	var ver bool
-	ezFlags.BoolVar(&ver, "v", false, "Print the version number of ezpass and exit.")
+	ezFlags.BoolVarP(&ver, "version", "v", false, "Print the version number of ezpass and exit.")
+
+	var help bool
+	ezFlags.BoolVarP(&help, "help", "h", false, "Print this message and exit.")
 
 	if err := ezFlags.Parse(os.Args[1:]); err != nil {
 		fmt.Fprintln(os.Stderr, "error parsing flags:", err)
@@ -38,8 +39,8 @@ func Main() int {
 	delimiter = strings.Trim(delimiter, `"`)
 	delimiter = strings.Trim(delimiter, "'")
 
-	if help || slices.Contains(os.Args[1:], "--help") {
-		ezFlags.PrintDefaults()
+	if help {
+		fmt.Fprintln(os.Stderr, ezFlags.FlagUsages())
 		return 0
 	}
 

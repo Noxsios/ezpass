@@ -7,8 +7,8 @@ stdout '^\w+\.\w+\.\w+$'
 exec ezpass -d ":"
 stdout '^\w+\:\w+\:\w+\:\w+$'
 
-#exec ezpass -d ":" -n 2
-#stdout '^\w+\:\w+$'
+exec ezpass -d ":" -n 2
+stdout '^\w+\:\w+$'
 
 exec ezpass -h
 cmp stderr usage.txt
@@ -26,10 +26,7 @@ exec ezpass --help -d ":" -n 2
 cmp stderr usage.txt
 
 -- usage.txt --
-Usage of ezpass:
-  -d string
-    	Delimiter between words. (default ".")
-  -h	Print this message and exit.
-  -n int
-    	Number of words in resulting password. (default 4)
-  -v	Print the version number of ezpass and exit.
+  -n, --number-of-words int   Number of words in resulting password. (default 4)
+  -d, --delimiter string      Delimiter between words. (default ".")
+  -v, --version               Print the version number of ezpass and exit.
+  -h, --help                  Print this message and exit.

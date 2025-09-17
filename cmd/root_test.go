@@ -20,8 +20,9 @@ func TestMain(m *testing.M) {
 
 func TestE2E(t *testing.T) {
 	testscript.Run(t, testscript.Params{
-		Dir:                ".",
-		RequireUniqueNames: true,
-		UpdateScripts:      true,
+		Dir:                 ".",
+		RequireUniqueNames:  true,
+		RequireExplicitExec: true,
+		UpdateScripts:       true,
 	})
 }

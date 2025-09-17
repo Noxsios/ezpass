@@ -1,0 +1,3 @@
+! exec ezpass -n foo
+stdout ''
+stderr 'error doing bad stuff'
