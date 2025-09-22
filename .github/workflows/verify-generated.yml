@@ -1,0 +1,36 @@
+name: Verify Generated Files
+
+on:
+  schedule:
+    # Run every Monday at 9:00 AM UTC
+    - cron: "0 9 * * 1"
+  workflow_dispatch: # Allow manual triggering
+
+permissions:
+  contents: read
+
+jobs:
+  verify-generated:
+    name: verify generated files are up-to-date
+    runs-on: macos-latest # current dev is on a M2 macbook air
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-go@v6
+        with:
+          go-version-file: go.mod
+          cache-dependency-path: |
+            go.sum
+            go.mod
+
+      - run: make generate
+
+      - name: Check if git is dirty
+        run: |
+          if [ -n "$(git status --porcelain)" ]; then
+            echo "::error::Generated files are out of date. Please run 'make generate' and commit the changes."
+            git status --porcelain
+            git diff
+            exit 1
+          else
+            echo "Generated files are up to date."
+          fi
