@@ -9,8 +9,8 @@ install: ## Installs local builds
 clean: ## Clean compiled binary / misc artifacts
 	rm -f ezpass
 
-words: ## Generate wordlist
-	go run gen/main.go > words/gen.go
+generate: ## Generate wordlist
+	go generate ./...
 
 test: ## Run tests
 	go test ./...
@@ -27,4 +27,4 @@ help: ## Show this help message
 	@echo 'Available targets:'
 	@awk 'BEGIN {FS = ":.*## "} /^[a-zA-Z0-9_-]+:.*## / {printf "  %-15s %s\n", $$1, $$2}' $(MAKEFILE_LIST)
 
-.PHONY: build clean words test lint lint-fix help
+.PHONY: build clean generate test lint lint-fix help

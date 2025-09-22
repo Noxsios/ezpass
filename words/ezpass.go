@@ -11,6 +11,8 @@ import (
 	"math/big"
 )
 
+//go:generate go run ../gen/main.go
+
 // PrintEzpass prints to wr a random passphrase of n words separated by a given delimiter.
 func PrintEzpass(wr io.Writer, n int, delimiter string) error {
 	upper := big.NewInt(int64(len(ALL)))
