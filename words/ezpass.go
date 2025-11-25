@@ -34,3 +34,21 @@ func PrintEzpass(wr io.Writer, n int, delimiter string) error {
 
 	return nil
 }
+
+// PrintEzpassEFF prints to wr a random passphrase of n words separated by a given delimiter using the EFF wordlist.
+func PrintEzpassEFF(wr io.Writer, n int, delimiter string) error {
+	for i := range n {
+		roll, err := Roll5Dice()
+		if err != nil {
+			return err
+		}
+
+		fmt.Fprint(wr, EFF[roll])
+
+		if i < n-1 {
+			fmt.Fprint(wr, delimiter)
+		}
+	}
+
+	return nil
+}

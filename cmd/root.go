@@ -21,6 +21,10 @@ func Main() int {
 	ezFlags.SortFlags = false
 	ezFlags.Usage = func() {}
 
+	var w string
+
+	ezFlags.StringVarP(&w, "wordlist", "w", "eff", "Wordlist to use")
+
 	var n int
 
 	ezFlags.IntVarP(&n, "number-of-words", "n", 4, "Number of words in resulting password.")
@@ -71,10 +75,19 @@ func Main() int {
 		return 1
 	}
 
-	if err := words.PrintEzpass(os.Stdout, n, delimiter); err != nil {
-		fmt.Fprintln(os.Stderr, "error:", err.Error())
+	switch w {
+	case "eff", "":
+		if err := words.PrintEzpassEFF(os.Stdout, n, delimiter); err != nil {
+			fmt.Fprintln(os.Stderr, "error:", err.Error())
 
-		return 1
+			return 1
+		}
+	default:
+		if err := words.PrintEzpass(os.Stdout, n, delimiter); err != nil {
+			fmt.Fprintln(os.Stderr, "error:", err.Error())
+
+			return 1
+		}
 	}
 
 	fmt.Print("\n")
