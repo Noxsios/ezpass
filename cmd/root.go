@@ -69,8 +69,8 @@ func Main() int {
 		return 0
 	}
 
-	if n <= 0 || n >= len(words.ALL) {
-		fmt.Fprintln(os.Stderr, "error: number of words must be 0 < n <", len(words.ALL), ", got:", n)
+	if n <= 0 || n >= len(words.USR_SHARE_DICT) {
+		fmt.Fprintln(os.Stderr, "error: number of words must be 0 < n <", len(words.USR_SHARE_DICT), ", got:", n)
 
 		return 1
 	}
