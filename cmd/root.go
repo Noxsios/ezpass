@@ -14,6 +14,29 @@ import (
 	"github.com/spf13/pflag"
 )
 
+type Wordlist string
+
+var EffWordlist = Wordlist("eff")
+var UsrShareDictWordlist = Wordlist("usr_share_dict")
+
+func (w Wordlist) Set(s string) error {
+	switch s {
+	case EffWordlist.String(), UsrShareDictWordlist.String():
+		w = Wordlist(s)
+		return nil
+	default:
+		return fmt.Errorf("%q is not a valid wordlist", s)
+	}
+}
+
+func (w Wordlist) String() string {
+	return string(w)
+}
+
+func (w Wordlist) Type() string {
+	return "wordlist"
+}
+
 // Main is the entry point for the ezpass CLI application.
 // It processes command line arguments and returns an exit code.
 func Main() int {
@@ -21,9 +44,9 @@ func Main() int {
 	ezFlags.SortFlags = false
 	ezFlags.Usage = func() {}
 
-	var w string
+	var w Wordlist = EffWordlist
 
-	ezFlags.StringVarP(&w, "wordlist", "w", "eff", "Wordlist to use")
+	ezFlags.VarP(w, "wordlist", "w", fmt.Sprintf("Wordlist to use %s", []string{EffWordlist.String(), UsrShareDictWordlist.String()}))
 
 	var n int
 
@@ -76,7 +99,7 @@ func Main() int {
 	}
 
 	switch w {
-	case "eff", "":
+	case EffWordlist:
 		if err := words.PrintEzpassEFF(os.Stdout, n, delimiter); err != nil {
 			fmt.Fprintln(os.Stderr, "error:", err.Error())
 

@@ -10,7 +10,7 @@ import (
 
 // Roll5Dice simulates rolling five dice and getting a singular numeric representation of the rolls.
 func Roll5Dice() (int, error) {
-	upper := big.NewInt(int64(6))
+	upper := big.NewInt(int64(5))
 	one := big.NewInt(int64(1))
 	result := 0
 

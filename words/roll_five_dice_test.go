@@ -46,19 +46,19 @@ func TestRoll5Dice(t *testing.T) {
 	})
 
 	t.Run("produces different results across multiple calls", func(t *testing.T) {
-		results := make(map[int]bool)
+		results := make(map[int]struct{})
 
 		for i := range 100 {
 			result, err := words.Roll5Dice()
 			if err != nil {
 				t.Fatalf("unexpected error on iteration %d: %v", i, err)
 			}
-			results[result] = true
+			results[result] = struct{}{}
 		}
 
 		// With 100 rolls, we should get at least some variety
 		// (not a guarantee, but statistically very likely)
-		if len(results) < 50 {
+		if len(results) < 80 {
 			t.Logf("warning: only %d unique results out of %d rolls (expected more variety)", len(results), 100)
 		}
 	})
@@ -66,7 +66,7 @@ func TestRoll5Dice(t *testing.T) {
 	t.Run("concurrent calls don't error", func(t *testing.T) {
 		t.Parallel()
 
-		for i := range 1000 {
+		for i := range 100000 {
 			t.Run(fmt.Sprintf("run-%d", i), func(t *testing.T) {
 				t.Parallel()
 
@@ -84,7 +84,7 @@ func TestRoll5Dice(t *testing.T) {
 
 	t.Run("no invalid digits like 0, 7, 8, or 9", func(t *testing.T) {
 		// Run multiple times to increase confidence
-		for attempt := range 50 {
+		for attempt := range 100000 {
 			result, err := words.Roll5Dice()
 			if err != nil {
 				t.Fatalf("unexpected error: %v", err)
