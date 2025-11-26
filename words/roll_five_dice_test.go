@@ -84,7 +84,7 @@ func TestRoll5Dice(t *testing.T) {
 
 	t.Run("no invalid digits like 0, 7, 8, or 9", func(t *testing.T) {
 		// Run multiple times to increase confidence
-		for attempt := 0; attempt < 50; attempt++ {
+		for attempt := range 50 {
 			result, err := words.Roll5Dice()
 			if err != nil {
 				t.Fatalf("unexpected error: %v", err)
