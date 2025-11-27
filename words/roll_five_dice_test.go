@@ -112,7 +112,7 @@ func testRoll5DiceNoInvalidDigits(t *testing.T) {
 	}
 }
 
-func BenchmarkRoll6Dice(b *testing.B) {
+func BenchmarkRoll5Dice(b *testing.B) {
 	for b.Loop() {
 		_, err := words.Roll5Dice()
 		if err != nil {

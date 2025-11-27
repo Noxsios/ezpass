@@ -16,7 +16,7 @@ test: ## Run tests
 	go test ./...
 
 bench: ## Run benchmark tests
-	go test ./words -bench BenchmarkRoll6Dice -benchmem
+	go test ./words -bench . -benchmem
 
 lint: ## Run linters
 	golangci-lint run ./...

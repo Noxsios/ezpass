@@ -5,6 +5,7 @@ package words_test
 
 import (
 	"fmt"
+	"io"
 	"strings"
 	"testing"
 
@@ -30,5 +31,14 @@ func TestPrintEzpass(t *testing.T) {
 				t.Errorf("unexpected error: %s", err.Error())
 			}
 		})
+	}
+}
+
+func BenchmarkPrintEzPass(b *testing.B) {
+	for b.Loop() {
+		err := words.PrintEzpass(io.Discard, 4, ".")
+		if err != nil {
+			b.Errorf("unexpected error: %s", err.Error())
+		}
 	}
 }
