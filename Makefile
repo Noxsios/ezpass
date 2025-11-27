@@ -1,10 +1,12 @@
 .DEFAULT_GOAL := build
 
+BUILD_ARGS?=-ldflags="-s -w" -trimpath
+
 build: ## Build ezpass
-	CGO_ENABLED=0 go build .
+	CGO_ENABLED=0 go build $(BUILD_ARGS) .
 
 install: ## Installs local builds
-	CGO_ENABLED=0 go install -v .
+	CGO_ENABLED=0 go install $(BUILD_ARGS) -v .
 
 clean: ## Clean compiled binary / misc artifacts
 	rm -f ezpass
