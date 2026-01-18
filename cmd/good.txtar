@@ -32,6 +32,7 @@ exec ezpass --version
 cmp stdout dev-version.txt
 
 -- usage.txt --
+  -w, --wordlist wordlist     Wordlist to use [eff usr_share_dict] (default eff)
   -n, --number-of-words int   Number of words in resulting password. (default 4)
   -d, --delimiter string      Delimiter between words. (default ".")
   -v, --version               Print the version number of ezpass and exit.

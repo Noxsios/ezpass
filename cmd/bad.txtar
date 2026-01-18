@@ -2,13 +2,16 @@
 stderr 'invalid argument "foo" for "-n, --number-of-words" flag: strconv.ParseInt: parsing "foo": invalid syntax'
 
 ! exec ezpass -n 0
-stderr 'error: number of words must be 0 < n <'
+stderr 'error: number of words must be > 0'
 
 ! exec ezpass -n -1
-stderr 'error: number of words must be 0 < n <'
+stderr 'error: number of words must be > 0'
 
 ! exec ezpass -n 300000
-stderr 'error: number of words must be 0 < n <'
+stderr 'error: number of words must be 0 < n < 235764 , got: 300000'
+
+! exec ezpass -w foo
+stderr 'invalid argument "foo" for "-w, --wordlist" flag: "foo" is not a valid wordlist'
 
 ! exec ezpass -unknown-flag
 stderr 'unknown shorthand flag'

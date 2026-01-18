@@ -12,6 +12,7 @@ linters:
     - funlen
     - wsl
     - wsl_v5
+    - cyclop
   settings:
     goheader:
       template: |-

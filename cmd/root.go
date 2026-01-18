@@ -8,6 +8,7 @@ import (
 	"fmt"
 	"os"
 	"runtime/debug"
+	"strconv"
 	"strings"
 
 	"github.com/noxsios/ezpass/words"
@@ -20,6 +21,12 @@ func Main() int {
 	ezFlags := pflag.NewFlagSet("ezpass", pflag.ExitOnError)
 	ezFlags.SortFlags = false
 	ezFlags.Usage = func() {}
+
+	w := words.EffWordlist
+
+	ezFlags.VarP(&w, "wordlist", "w",
+		fmt.Sprintf("Wordlist to use %s", words.AvailableWordlists()),
+	)
 
 	var n int
 
@@ -65,16 +72,37 @@ func Main() int {
 		return 0
 	}
 
-	if n <= 0 || n >= len(words.ALL) {
-		fmt.Fprintln(os.Stderr, "error: number of words must be 0 < n <", len(words.ALL), ", got:", n)
+	if n <= 0 {
+		fmt.Fprintln(os.Stderr, "error: number of words must be > 0")
 
 		return 1
 	}
 
-	if err := words.PrintEzpass(os.Stdout, n, delimiter); err != nil {
-		fmt.Fprintln(os.Stderr, "error:", err.Error())
+	switch w {
+	case words.EffWordlist:
+		if n >= len(words.EFF) {
+			fmt.Fprintln(os.Stderr, "error: number of words must be 0 < n <", len(words.USR_SHARE_DICT), ", got:", n)
 
-		return 1
+			return 1
+		}
+		if err := words.PrintEzpassEFF(os.Stdout, n, delimiter); err != nil {
+			fmt.Fprintln(os.Stderr, "error:", err.Error())
+
+			return 1
+		}
+	case words.UsrShareDictWordlist:
+		if n >= len(words.USR_SHARE_DICT) {
+			fmt.Fprintln(os.Stderr, "error: number of words must be 0 < n <", len(words.USR_SHARE_DICT), ", got:", n)
+
+			return 1
+		}
+		if err := words.PrintEzpass(os.Stdout, n, delimiter); err != nil {
+			fmt.Fprintln(os.Stderr, "error:", err.Error())
+
+			return 1
+		}
+	default:
+		fmt.Fprintln(os.Stderr, "error:", strconv.Quote(w.String()), "wordlist has no handler")
 	}
 
 	fmt.Print("\n")
