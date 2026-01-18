@@ -72,20 +72,30 @@ func Main() int {
 		return 0
 	}
 
-	if n <= 0 || n >= 10000 {
-		fmt.Fprintln(os.Stderr, "error: number of words must be 0 < n < 10000, got:", n)
+	if n <= 0 {
+		fmt.Fprintln(os.Stderr, "error: number of words must be > 0")
 
 		return 1
 	}
 
 	switch w {
 	case words.EffWordlist:
+		if n >= len(words.EFF) {
+			fmt.Fprintln(os.Stderr, "error: number of words must be 0 < n <", len(words.USR_SHARE_DICT), ", got:", n)
+
+			return 1
+		}
 		if err := words.PrintEzpassEFF(os.Stdout, n, delimiter); err != nil {
 			fmt.Fprintln(os.Stderr, "error:", err.Error())
 
 			return 1
 		}
 	case words.UsrShareDictWordlist:
+		if n >= len(words.USR_SHARE_DICT) {
+			fmt.Fprintln(os.Stderr, "error: number of words must be 0 < n <", len(words.USR_SHARE_DICT), ", got:", n)
+
+			return 1
+		}
 		if err := words.PrintEzpass(os.Stdout, n, delimiter); err != nil {
 			fmt.Fprintln(os.Stderr, "error:", err.Error())
 
