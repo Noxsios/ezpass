@@ -81,7 +81,7 @@ func Main() int {
 	switch w {
 	case words.EffWordlist:
 		if n >= len(words.EFF) {
-			fmt.Fprintln(os.Stderr, "error: number of words must be 0 < n <", len(words.USR_SHARE_DICT), ", got:", n)
+			fmt.Fprintln(os.Stderr, "error: number of words must be 0 < n <", len(words.EFF), ", got:", n)
 
 			return 1
 		}
