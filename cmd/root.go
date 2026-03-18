@@ -103,6 +103,8 @@ func Main() int {
 		}
 	default:
 		fmt.Fprintln(os.Stderr, "error:", strconv.Quote(w.String()), "wordlist has no handler")
+
+		return 1
 	}
 
 	fmt.Print("\n")

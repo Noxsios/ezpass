@@ -13,5 +13,8 @@ stderr 'error: number of words must be 0 < n < 7776 , got: 300000'
 ! exec ezpass -w foo
 stderr 'invalid argument "foo" for "-w, --wordlist" flag: "foo" is not a valid wordlist'
 
+! exec ezpass -w usr_share_dict -n 300000
+stderr 'error: number of words must be 0 < n <'
+
 ! exec ezpass -unknown-flag
 stderr 'unknown shorthand flag'
