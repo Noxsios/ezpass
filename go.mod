@@ -3,7 +3,7 @@ module github.com/noxsios/ezpass
 go 1.26.0
 
 require (
-	github.com/rogpeppe/go-internal v1.15.0
+	github.com/rogpeppe/go-internal v1.16.0
 	github.com/spf13/pflag v1.0.10
 )
 
