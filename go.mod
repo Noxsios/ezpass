@@ -1,6 +1,6 @@
 module github.com/noxsios/ezpass
 
-go 1.26.0
+go 1.27.0
 
 require (
 	github.com/rogpeppe/go-internal v1.16.0
