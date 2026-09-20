@@ -86,6 +86,7 @@ var USR_SHARE_DICT = [{{ len . }}]string{ {{- range $word := . }}"{{$word}}",{{e
 		"fields": strings.Fields,
 	})
 
+	//nolint:lll
 	tmpl, err = tmpl.Parse(`// SPDX-License-Identifier: Apache-2.0
 // SPDX-FileCopyrightText: 2024-Present Harry Randazzo
 
