@@ -1,5 +1,5 @@
 ! exec ezpass -n foo
-stderr 'invalid argument "foo" for "-n, --number-of-words" flag: strconv.ParseInt: parsing "foo": invalid syntax'
+stderr 'invalid argument "foo" for "-n, --number-of-words" flag: must be an integer'
 
 ! exec ezpass -n 0
 stderr 'error: number of words must be > 0'

@@ -24,6 +24,6 @@ func TestE2E(t *testing.T) {
 		Dir:                 ".",
 		RequireUniqueNames:  true,
 		RequireExplicitExec: true,
-		// UpdateScripts:       true,
+		UpdateScripts:       os.Getenv("UPDATE_SCRIPTS") == "1",
 	})
 }
